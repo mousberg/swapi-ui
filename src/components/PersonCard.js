@@ -6,7 +6,7 @@ const PersonCard = ({ person }) => {
     const id = person.url.split('/')[5];
     const [imageError, setImageError] = useState(false);
 
-    // Move character images outside component to avoid recreation on each render
+    // Character images mapping
     const CHARACTER_IMAGES = {
         'Luke Skywalker': 'https://starwars-visualguide.com/assets/img/characters/1.jpg',
         'C-3PO': 'https://starwars-visualguide.com/assets/img/characters/2.jpg',

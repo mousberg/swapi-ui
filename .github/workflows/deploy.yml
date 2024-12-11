@@ -18,6 +18,8 @@ jobs:
           node-version: '16'
 
       - name: Install Dependencies
+        env:
+          CI: false
         run: npm install
 
       - name: Build
