@@ -53,6 +53,7 @@ const HomePage = () => {
                     setIsLoading(false);
                 }
             };
+
             fetchData();
         }
     }, [currentPage, searchTerm]);
