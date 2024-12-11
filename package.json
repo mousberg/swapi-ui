@@ -35,7 +35,7 @@
             "last 1 safari version"
         ]
     },
-    "homepage": "https://mousberg.github.io/swapi-ui",
+    "homepage": "https://mousberg.github.io/swapi-ui/",
     "devDependencies": {
         "gh-pages": "^6.2.0"
     }
