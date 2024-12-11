@@ -20,9 +20,6 @@ const PersonCard = ({ person }) => {
         'Obi-Wan Kenobi': 'https://starwars-visualguide.com/assets/img/characters/10.jpg',
     };
 
-    // Add loading state for images
-    const [isImageLoading, setIsImageLoading] = useState(true);
-
     const getImageUrl = () => {
         if (imageError) {
             return `https://ui-avatars.com/api/?name=${encodeURIComponent(person.name)}&size=300&background=random`;
