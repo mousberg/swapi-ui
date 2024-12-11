@@ -15,7 +15,8 @@ A React-based web application that allows users to explore Star Wars characters 
 ## Installation
 
 1. Clone the repository:
-```git clone https://github.com/mousberg/swapi-ui.git
+```bash
+git clone https://github.com/mousberg/swapi-ui.git
 ```
 
 2. Install dependencies:
