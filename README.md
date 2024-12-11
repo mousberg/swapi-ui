@@ -24,7 +24,19 @@ git clone https://github.com/mousberg/swapi-ui.git
 npm install
 ```
 
-3. Start the development server:
+3. Set Node options (if using Node.js 17+):
+
+For macOS/Linux:
+```bash
+export NODE_OPTIONS=--openssl-legacy-provider
+```
+
+For Windows:
+```bash
+set NODE_OPTIONS=--openssl-legacy-provider
+```
+
+4. Start the development server:
 ```bash
 npm start
 ```
