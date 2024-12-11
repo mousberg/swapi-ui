@@ -13,9 +13,7 @@
         "start": "export NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
         "build": "export NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "predeploy": "npm run build",
-        "deploy": "export NODE_OPTIONS=--openssl-legacy-provider && gh-pages -d build"
+        "eject": "react-scripts eject"
     },
     "eslintConfig": {
         "extends": [
@@ -35,8 +33,5 @@
             "last 1 safari version"
         ]
     },
-    "homepage": "https://mousberg.github.io/swapi-ui/",
-    "devDependencies": {
-        "gh-pages": "^6.2.0"
-    }
+    "homepage": "https://mousberg.github.io/swapi-ui/"
 }
