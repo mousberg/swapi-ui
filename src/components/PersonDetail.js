@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner';
 
+const API_URL = 'https://swapi.py4e.com/api/';
 // Simple cache object
 const cache = {
     people: {},
@@ -35,7 +36,7 @@ const PersonDetail = ({ match }) => {
                 }
 
                 // Fetch person if not cached
-                const response = await fetch(`https://swapi.dev/api/people/${personId}/`);
+                const response = await fetch(`${API_URL}/people/${personId}/`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch person data');
                 }
