@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
@@ -21,17 +23,17 @@ jobs:
           node-version: '16.20.2'
 
       - name: Install Dependencies
-        env:
-          CI: false
         run: npm install
 
       - name: Build
-        env:
-          CI: false
         run: npm run build
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          branch: gh-pages
-          folder: build
+          path: ./build
+
+      - name: Deploy
+        uses: actions/deploy-pages@v4
+        with:
+          folder: ./build
