@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PersonCard from './PersonCard';
 import LoadingSpinner from './LoadingSpinner';
 
+const API_URL = 'https://swapi.py4e.com/api/'
+
 const HomePage = () => {
     const [people, setPeople] = useState([]);
     const [allPeople, setAllPeople] = useState([]);
@@ -16,7 +18,7 @@ const HomePage = () => {
         const fetchAllPeople = async () => {
             try {
                 let allCharacters = [];
-                let nextUrl = 'https://swapi.dev/api/people/';
+                let nextUrl = `${API_URL}/people/`;
 
                 while (nextUrl) {
                     const response = await fetch(nextUrl);
@@ -40,7 +42,7 @@ const HomePage = () => {
             const fetchData = async () => {
                 try {
                     setIsLoading(true);
-                    const response = await fetch(`https://swapi.dev/api/people/?page=${currentPage}`);
+                    const response = await fetch(`${API_URL}/people/?page=${currentPage}`);
                     if (!response.ok) {
                         throw new Error('Failed to fetch data');
                     }
