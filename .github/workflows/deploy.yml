@@ -23,7 +23,10 @@ jobs:
           node-version: '16.20.2'
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install --ignore-scripts --no-audit --no-fund --no-optional
+          npm install ejs@latest --no-scripts  # Install EJS separately without scripts
+          npm rebuild --ignore-scripts  # Rebuild without running scripts
 
       - name: Build
         run: npm run build
