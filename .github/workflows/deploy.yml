@@ -14,38 +14,28 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      NODE_ENV: production
-      npm_config_ignore_scripts: true
-      NODE_OPTIONS: ""
-      OPENSSL_CONF: /dev/null
+      NODE_OPTIONS: "--max_old_space_size=4096"
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.20.2'
+          node-version: '16.x'
+          cache: 'npm'
 
       - name: Install Dependencies
-        env:
-          NODE_OPTIONS: ""
-        run: |
-          npm install --legacy-peer-deps --no-optional --ignore-scripts --no-package-lock
-          npm install --save-dev @babel/plugin-transform-private-property-in-object@7.21.11 --ignore-scripts
-          npm install core-js@3.23.3 --ignore-scripts --save-exact
+        run: npm ci
 
       - name: Build
-        env:
-          NODE_OPTIONS: ""
-          CI: false
         run: npm run build
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./build
+        env:
+          CI: false
 
       - name: Deploy
-        uses: actions/deploy-pages@v4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ./build
+          branch: gh-pages
+          folder: build
+          clean: true
