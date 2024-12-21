@@ -24,8 +24,9 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install --no-optional --no-package-lock
+          npm install --omit=optional --omit=dev
           npm install --save-dev @babel/plugin-proposal-private-property-in-object
+          npm install react-scripts@4.0.3 --save-exact
 
       - name: Build
         run: npm run build
