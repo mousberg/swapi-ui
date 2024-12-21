@@ -13,6 +13,9 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      npm_config_ignore_scripts: true
+      NODE_OPTIONS: ""
     steps:
       - uses: actions/checkout@v3
 
@@ -21,15 +24,15 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Clear NODE_OPTIONS
-        run: unset NODE_OPTIONS
+      - name: Configure npm
+        run: |
+          npm config set ignore-scripts true
+          npm config set legacy-peer-deps true
+          npm config set audit false
+          npm config set fund false
 
       - name: Install Dependencies
-        run: |
-          npm install --legacy-peer-deps --ignore-scripts --no-audit --no-optional
-          npm install --save-dev @babel/plugin-proposal-private-property-in-object@7.21.11 --no-scripts
-          npm install core-js@2.6.12 --no-scripts
-          npm install babel-runtime --no-scripts
+        run: npm install
 
       - name: Build
         run: CI=false npm run build
