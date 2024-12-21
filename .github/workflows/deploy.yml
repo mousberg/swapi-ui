@@ -20,24 +20,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '12.22.12'
 
       - name: Install Dependencies
-        run: |
-          # Install without running any scripts
-          npm install --ignore-scripts
-          
-          # Install core-js separately without postinstall
-          npm install core-js@2.6.12 --ignore-scripts
-          
-          # Install babel-runtime without scripts
-          npm install babel-runtime --ignore-scripts
+        run: npm install --legacy-peer-deps
 
       - name: Build
         run: npm run build
         env:
           CI: false
           SKIP_PREFLIGHT_CHECK: true
+          NODE_ENV: production
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
