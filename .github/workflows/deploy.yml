@@ -23,9 +23,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: |
-          npm config set legacy-peer-deps true
-          npm ci
+        run: npm install --legacy-peer-deps
 
       - name: Build
         run: |
