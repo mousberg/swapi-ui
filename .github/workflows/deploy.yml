@@ -33,26 +33,13 @@ jobs:
           npm install --no-package-lock
           npm install core-js@3.23.3 --save-exact --no-package-lock
 
-      - name: Debug
-        run: |
-          pwd
-          ls -la
-          echo "NODE_ENV: $NODE_ENV"
-          echo "PATH: $PATH"
-
       - name: Build
-        run: npm run build
+        run: |
+          mkdir -p build
+          CI=false npm run build
         env:
-          CI: false
           SKIP_PREFLIGHT_CHECK: true
           NODE_ENV: production
-
-      - name: Debug Build
-        run: |
-          pwd
-          ls -la
-          echo "Looking for build directory..."
-          find . -name "build" -type d
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
