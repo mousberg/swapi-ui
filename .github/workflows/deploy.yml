@@ -29,11 +29,10 @@ jobs:
         run: npm install --legacy-peer-deps --ignore-scripts
 
       - name: Build
-        run: |
-          unset NODE_OPTIONS
-          npm run build
+        run: npm run build
         env:
           CI: false
+          DISABLE_ESLINT_PLUGIN: true
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
