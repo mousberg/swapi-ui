@@ -30,8 +30,9 @@ jobs:
         env:
           NODE_OPTIONS: ""
         run: |
-          npm install --legacy-peer-deps --no-optional --ignore-scripts
+          npm install --legacy-peer-deps --no-optional --ignore-scripts --no-package-lock
           npm install --save-dev @babel/plugin-transform-private-property-in-object@7.21.11 --ignore-scripts
+          npm install core-js@3.23.3 --ignore-scripts --save-exact
 
       - name: Build
         env:
