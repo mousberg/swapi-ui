@@ -23,7 +23,9 @@ jobs:
           node-version: '16.15.0'
 
       - name: Install Dependencies
-        run: npm install --ignore-scripts --legacy-peer-deps
+        run: |
+          npm install --no-optional --no-package-lock
+          npm install --save-dev @babel/plugin-proposal-private-property-in-object
 
       - name: Build
         run: npm run build
