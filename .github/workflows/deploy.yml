@@ -21,12 +21,21 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.20.2'
+          cache: 'npm'
+
+      - name: Clean npm cache
+        run: npm cache clean --force
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install --legacy-peer-deps --no-audit
+        env:
+          NODE_OPTIONS: ""
 
       - name: Build
         run: npm run build
+        env:
+          CI: false
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
