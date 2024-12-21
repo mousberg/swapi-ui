@@ -19,18 +19,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.15.0'
-          cache: 'npm'
+          node-version: '14'
 
       - name: Install Dependencies
-        run: npm install --legacy-peer-deps --ignore-scripts
+        run: |
+          npm install --legacy-peer-deps --ignore-scripts
+          npm install --save-dev @babel/plugin-proposal-private-property-in-object@7.21.11
 
       - name: Build
         run: |
           export NODE_OPTIONS=--openssl-legacy-provider
-          npm run build
-        env:
-          CI: false
+          CI=false npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
