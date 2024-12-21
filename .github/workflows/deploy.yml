@@ -21,16 +21,18 @@ jobs:
         with:
           node-version: '14'
 
+      - name: Clear NODE_OPTIONS
+        run: unset NODE_OPTIONS
+
       - name: Install Dependencies
         run: |
-          npm install --legacy-peer-deps --ignore-scripts --no-audit
-          npm install --save-dev @babel/plugin-proposal-private-property-in-object@7.21.11
-          npm install ejs@3.1.9 --no-scripts
+          npm install --legacy-peer-deps --ignore-scripts --no-audit --no-optional
+          npm install --save-dev @babel/plugin-proposal-private-property-in-object@7.21.11 --no-scripts
+          npm install core-js@2.6.12 --no-scripts
+          npm install babel-runtime --no-scripts
 
       - name: Build
-        run: |
-          unset NODE_OPTIONS
-          CI=false npm run build
+        run: CI=false npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
