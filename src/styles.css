@@ -136,28 +136,43 @@ h1 {
 }
 
 .person-detail {
+    position: relative;
     max-width: 800px;
     margin: 20px auto;
     padding: 30px;
-    background: linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%);
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 232, 31, 0.2);
+    color: #FFE81F;
+}
+
+.person-detail h1 {
+    color: #FFE81F;
+    text-shadow: 0 0 10px rgba(255, 232, 31, 0.3);
+    margin: 10px 0;
+}
+
+.person-detail h2 {
+    color: #FFE81F;
+    margin: 20px 0;
 }
 
 .person-info {
-    background: linear-gradient(145deg, #f8f9fa 0%, #f0f0f0 100%);
+    background: rgba(0, 0, 0, 0.5);
     padding: 25px;
     border-radius: 12px;
     margin: 25px 0;
-    box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid rgba(255, 232, 31, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .person-info p {
+    color: #fff;
     display: flex;
     justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 232, 31, 0.2);
     margin: 0;
     font-weight: 400;
 }
@@ -167,42 +182,55 @@ h1 {
 }
 
 .person-info p strong {
+    color: #FFE81F;
     font-weight: 500;
 }
 
 .neighbors {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 232, 31, 0.1);
     margin-top: 30px;
 }
 
 .neighbors-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .neighbor-card {
-    background: linear-gradient(145deg, #f8f9fa 0%, #f0f0f0 100%);
+    background: rgba(0, 0, 0, 0.6);
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255,255,255,0.8);
+    border: 1px solid rgba(255, 232, 31, 0.2);
+    color: #fff;
 }
 
 .neighbor-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-    background: linear-gradient(145deg, #ffffff 0%, #f0f0f0 100%);
+    box-shadow: 0 8px 25px rgba(255, 232, 31, 0.2);
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 232, 31, 0.4);
 }
 
 .neighbor-card h3 {
-    color: #2c3e50;
+    color: #FFE81F;
     margin: 0 0 10px 0;
     font-size: 1.2rem;
     font-weight: 600;
     letter-spacing: -0.2px;
+}
+
+.neighbor-card p {
+    color: #fff;
+    margin: 5px 0;
+    font-size: 0.9rem;
 }
 
 .back-button, .load-more {
@@ -360,25 +388,37 @@ h1 {
 
 /* Stats styles */
 .stats-container {
-    background: var(--card-bg, #ffffff);
+    background: rgba(0, 0, 0, 0.4);
     padding: 20px;
     border-radius: 12px;
     margin: 20px 0;
+    border: 1px solid rgba(255, 232, 31, 0.2);
 }
 
 .stat-bar {
     margin: 15px 0;
 }
 
-.stat-bar label {
-    display: block;
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 8px;
+}
+
+.stat-label {
+    color: #FFE81F;
     font-weight: 500;
+}
+
+.stat-value {
+    color: #fff;
+    font-size: 0.9em;
 }
 
 .bar-container {
     height: 8px;
-    background: #eee;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     overflow: hidden;
 }
@@ -387,44 +427,192 @@ h1 {
     height: 100%;
     background: linear-gradient(90deg, #007bff, #00bcd4);
     transition: width 0.6s ease;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
 }
 
-/* Star Wars Header styles */
+.bar-fill.unknown {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 232, 31, 0.2),
+        rgba(255, 232, 31, 0.2) 10px,
+        rgba(255, 232, 31, 0.1) 10px,
+        rgba(255, 232, 31, 0.1) 20px
+    );
+    animation: pulse-unknown 2s infinite;
+}
+
+@keyframes pulse-unknown {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.5; }
+}
+
+/* Enhanced Star Wars Header styles */
 .star-wars-header {
-    background: linear-gradient(to bottom, #1a1a1a, #000000);
+    background: linear-gradient(to bottom, #000000, #111111);
     padding: 40px 0;
     margin-bottom: 40px;
     position: relative;
     overflow: hidden;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
 }
 
-.header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
+/* Star field effect */
+.star-wars-header::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    animation: starfield 15s linear infinite;
+    opacity: 0.2;
 }
 
-.star-wars-header h1 {
+@keyframes starfield {
+    from { transform: translateY(0); }
+    to { transform: translateY(200px); }
+}
+
+.header-title {
     color: #FFE81F;
-    font-size: 3rem;
+    font-size: 3.5rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin: 0;
     font-weight: 700;
-    text-shadow: 0 0 10px rgba(255, 232, 31, 0.3);
+    text-shadow: 
+        0 0 10px rgba(255, 232, 31, 0.3),
+        0 0 20px rgba(255, 232, 31, 0.2),
+        0 0 30px rgba(255, 232, 31, 0.1);
     position: relative;
     z-index: 1;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    user-select: none;
+    display: inline-block;
+    perspective: 1000px;
+    transform-style: preserve-3d;
 }
 
+/* 3D hover effect */
+.header-title:hover {
+    transform: 
+        scale(1.05)
+        rotateX(5deg)
+        rotateY(-5deg);
+    text-shadow: 
+        0 0 20px rgba(255, 232, 31, 0.5),
+        0 0 40px rgba(255, 232, 31, 0.3),
+        0 0 60px rgba(255, 232, 31, 0.2);
+}
+
+/* Lightsaber underline effect */
+.header-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #FFE81F,
+        transparent
+    );
+    transform: translateX(-50%);
+    transition: width 0.5s ease, box-shadow 0.5s ease;
+}
+
+.header-title:hover::after {
+    width: 100%;
+    box-shadow: 
+        0 0 10px rgba(255, 232, 31, 0.5),
+        0 0 20px rgba(255, 232, 31, 0.3),
+        0 0 30px rgba(255, 232, 31, 0.2);
+}
+
+/* Add a subtle force field effect */
+.header-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(255, 232, 31, 0.1) 0%,
+        transparent 60%
+    );
+    animation: forceField 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes forceField {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-title {
+        font-size: 2.5rem;
+    }
+    
+    .star-wars-header::before {
+        opacity: 0.15;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-title {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+    .star-wars-header {
+        padding: 30px 0;
+        margin-bottom: 20px;
+    }
+
+    .header-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .star-wars-header {
+        padding: 20px 0;
+    }
+
+    .header-title {
+        font-size: 1.5rem;
+    }
+
+    .header-content {
+        padding: 0 15px;
+    }
+}
+
+/* Update the header decoration styles */
 .header-decoration {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 0;
     width: 100%;
     height: 2px;
-    background: rgba(255, 232, 31, 0.1);
-    box-shadow: 0 0 20px rgba(255, 232, 31, 0.2);
+    transform: translateY(-50%);
 }
 
 .header-decoration::before,
@@ -433,8 +621,13 @@ h1 {
     position: absolute;
     top: 50%;
     width: 40%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(255, 232, 31, 0.5), transparent);
+    height: 2px;
+    background: linear-gradient(
+        to right, 
+        transparent, 
+        rgba(255, 232, 31, 0.7),
+        transparent
+    );
 }
 
 .header-decoration::before {
@@ -520,6 +713,23 @@ h1 {
     .neighbor-card {
         padding: 15px;
     }
+
+    .person-info p {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .person-info p strong {
+        font-size: 0.9em;
+    }
+
+    .neighbor-card {
+        padding: 15px;
+    }
+
+    .neighbor-card h3 {
+        font-size: 1.1rem;
+    }
 }
 
 /* Additional optimizations for even smaller screens */
@@ -587,4 +797,725 @@ h1 {
     .pagination button.active {
         display: inline-block;
     }
+}
+
+/* Add these styles to your existing styles.css */
+
+.compare-panel {
+    background: linear-gradient(145deg, #1a1a1a, #000000);
+    padding: 30px;
+    border-radius: 15px;
+    color: #FFE81F;
+    margin: 20px auto;
+    max-width: 1000px;
+}
+
+.battle-selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.character-selector {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.character-selector select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: #333;
+    color: #FFE81F;
+    border: 2px solid #FFE81F;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.vs-symbol {
+    font-size: 40px;
+    font-weight: bold;
+    color: #FFE81F;
+    align-self: center;
+    text-shadow: 0 0 10px rgba(255, 232, 31, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.battle-controls {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.battle-button {
+    background: #FFE81F;
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.battle-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 232, 31, 0.5);
+}
+
+.battle-result {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.power-levels {
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+.reset-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFE81F;
+    border: 2px solid #FFE81F;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 500;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.reset-button:hover {
+    background: #FFE81F;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 232, 31, 0.3);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Make it responsive */
+@media (max-width: 768px) {
+    .battle-selection {
+        flex-direction: column;
+    }
+    
+    .vs-symbol {
+        margin: 20px 0;
+    }
+}
+
+/* Add these styles to your existing styles.css */
+
+.mode-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mode-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #FFE81F;
+    background: rgba(0, 0, 0, 0.8);
+    color: #FFE81F;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter Tight', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mode-button:hover {
+    background: rgba(255, 232, 31, 0.2);
+    box-shadow: 0 0 15px rgba(255, 232, 31, 0.3);
+}
+
+.mode-button.active {
+    background: #FFE81F;
+    color: #000;
+    font-weight: 600;
+    box-shadow: 0 0 20px rgba(255, 232, 31, 0.4);
+}
+
+/* Add responsive styles for mode buttons */
+@media (max-width: 480px) {
+    .mode-toggle {
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+    }
+    
+    .mode-button {
+        width: 100%;
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Add these to your existing styles */
+
+.character-portrait {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #FFE81F;
+    box-shadow: 0 0 20px rgba(255, 232, 31, 0.3);
+    transition: all 0.3s ease;
+}
+
+.character-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.character-portrait:hover img {
+    transform: scale(1.1);
+}
+
+.battle-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 20px 0;
+    position: relative;
+}
+
+.vs-symbol {
+    font-size: 48px;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(255, 232, 31, 0.5);
+    text-align: center;
+    width: 100%;
+}
+
+.lightsaber-cross {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin: 20px auto;
+    transform-origin: center;
+}
+
+.lightsaber {
+    position: absolute;
+    width: 4px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+}
+
+.lightsaber.blue {
+    background: #007bff;
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-shadow: 
+        0 0 10px #007bff,
+        0 0 20px #007bff,
+        0 0 30px #007bff,
+        0 0 40px rgba(0, 123, 255, 0.5);
+}
+
+.lightsaber.red {
+    background: #dc3545;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    box-shadow: 
+        0 0 10px #dc3545,
+        0 0 20px #dc3545,
+        0 0 30px #dc3545,
+        0 0 40px rgba(220, 53, 69, 0.5);
+}
+
+.winner-announcement {
+    position: relative;
+    padding: 20px;
+    background: rgba(255, 232, 31, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.victory-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        transparent 0%,
+        rgba(255, 232, 31, 0.1) 50%,
+        transparent 100%
+    );
+    background-size: 200% 200%;
+    animation: victory-shine 2s linear infinite;
+}
+
+@keyframes victory-shine {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Update existing styles */
+.character-selector {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 232, 31, 0.2);
+}
+
+.vs-symbol {
+    font-size: 48px;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(255, 232, 31, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .character-portrait {
+        width: 150px;
+        height: 150px;
+    }
+
+    .lightsaber-cross {
+        transform: rotate(90deg);
+        margin: 40px 0;
+    }
+}
+
+/* Update these styles in your styles.css */
+
+.battle-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 20px 0;
+    position: relative;
+}
+
+.vs-symbol {
+    font-size: 48px;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(255, 232, 31, 0.5);
+    text-align: center;
+    width: 100%;
+}
+
+.lightsaber-cross {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin: 20px auto;
+    transform-origin: center;
+}
+
+.lightsaber {
+    position: absolute;
+    width: 4px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+}
+
+/* Update the media query for mobile */
+@media (max-width: 768px) {
+    .battle-selection {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .battle-divider {
+        padding: 10px 0;
+        margin: 10px 0;
+        min-height: 150px; /* Ensure consistent spacing */
+    }
+
+    .vs-symbol {
+        font-size: 36px; /* Slightly smaller on mobile */
+        margin: 10px 0;
+    }
+
+    .lightsaber-cross {
+        width: 50px; /* Slightly smaller on mobile */
+        height: 50px;
+        margin: 15px auto;
+    }
+
+    .lightsaber {
+        height: 80px; /* Slightly shorter lightsabers on mobile */
+    }
+
+    .character-selector {
+        width: 100%;
+        max-width: 300px; /* Limit width on mobile */
+    }
+}
+
+/* Add smooth transitions */
+.battle-divider, .vs-symbol, .lightsaber-cross {
+    transition: all 0.3s ease;
+}
+
+/* Enhance the glow effect */
+.lightsaber.blue {
+    background: #007bff;
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-shadow: 
+        0 0 10px #007bff,
+        0 0 20px #007bff,
+        0 0 30px #007bff,
+        0 0 40px rgba(0, 123, 255, 0.5);
+}
+
+.lightsaber.red {
+    background: #dc3545;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    box-shadow: 
+        0 0 10px #dc3545,
+        0 0 20px #dc3545,
+        0 0 30px #dc3545,
+        0 0 40px rgba(220, 53, 69, 0.5);
+}
+
+/* Add a subtle animation to the VS text */
+.vs-symbol {
+    animation: vs-glow 2s ease-in-out infinite;
+}
+
+@keyframes vs-glow {
+    0%, 100% { text-shadow: 0 0 20px rgba(255, 232, 31, 0.5); }
+    50% { text-shadow: 0 0 30px rgba(255, 232, 31, 0.8); }
+}
+
+/* Add these styles for the character portrait in detail view */
+.person-detail-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.detail-portrait {
+    width: 250px;
+    height: 250px;
+    margin: 20px auto;
+    border: 4px solid #FFE81F;
+    box-shadow: 
+        0 0 30px rgba(255, 232, 31, 0.4),
+        inset 0 0 20px rgba(255, 232, 31, 0.2);
+}
+
+.detail-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.detail-portrait:hover img {
+    transform: scale(1.05);
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+    .detail-portrait {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .person-detail-header {
+        gap: 15px;
+    }
+}
+
+/* Update the back button styles */
+.back-button {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #FFE81F;
+    border: 2px solid #FFE81F;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(255, 232, 31, 0.3);
+    z-index: 10; /* Ensure button stays on top */
+}
+
+.back-button:hover {
+    background: #FFE81F;
+    color: #000;
+    transform: translateX(-3px);
+    box-shadow: 0 0 15px rgba(255, 232, 31, 0.4);
+}
+
+/* Update mobile styles for person detail */
+@media (max-width: 768px) {
+    .person-detail {
+        margin: 10px;
+        padding: 60px 20px 20px; /* Increased top padding to accommodate the back button */
+    }
+
+    .back-button {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        min-width: 100px;
+        text-align: center;
+    }
+
+    .back-button:hover {
+        transform: translateX(-50%) translateY(-2px); /* Adjust hover animation for centered button */
+    }
+
+    .person-detail-header {
+        margin-top: 20px; /* Add some space between back button and header */
+    }
+}
+
+/* Additional adjustments for very small screens */
+@media (max-width: 480px) {
+    .person-detail {
+        padding: 70px 15px 20px; /* Slightly more top padding for smaller screens */
+    }
+
+    .back-button {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+
+/* Add back the header content styles with proper centering */
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px; /* Ensure consistent height */
+}
+
+/* Update the header title for better centering */
+.header-title {
+    /* existing styles... */
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Update the star field to ensure it doesn't affect layout */
+.star-wars-header::before {
+    z-index: 1;
+}
+
+/* Update force field effect to ensure it doesn't affect layout */
+.header-content::after {
+    z-index: 1;
+}
+
+/* Special Battle Animations */
+.special-battle-alert {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.special-battle-message {
+    color: #FFE81F;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 232, 31, 0.5);
+}
+
+.special-battle-quote {
+    color: #fff;
+    font-style: italic;
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+/* Animation classes */
+.force-clash {
+    position: relative;
+    overflow: hidden;
+}
+
+.force-clash::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(0, 123, 255, 0.2),
+        rgba(220, 53, 69, 0.2)
+    );
+    animation: forceClash 2s infinite;
+}
+
+.high-ground::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(
+        to top,
+        rgba(255, 232, 31, 0.2),
+        transparent
+    );
+    animation: highGround 3s infinite;
+}
+
+.force-lightning::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(90deg, 
+            transparent 0%,
+            rgba(0, 123, 255, 0.3) 50%,
+            transparent 100%
+        );
+    animation: forceLightning 0.5s infinite;
+}
+
+.blaster-duel::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #ff0000;
+    animation: blasterShots 1s infinite;
+}
+
+.force-family {
+    animation: forcePulse 2s infinite;
+}
+
+/* Animation keyframes */
+@keyframes forceClash {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes highGround {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes forceLightning {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes blasterShots {
+    0% { transform: translateX(-100%) translateY(random(100) + px); }
+    100% { transform: translateX(100%) translateY(random(100) + px); }
+}
+
+@keyframes forcePulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 232, 31, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(255, 232, 31, 0.5); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .special-battle-message {
+        font-size: 1.2rem;
+    }
+    
+    .special-battle-quote {
+        font-size: 1rem;
+    }
+}
+
+/* Update reset button styles */
+.reset-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFE81F;
+    border: 2px solid #FFE81F;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 500;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.reset-button:hover {
+    background: #FFE81F;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 232, 31, 0.3);
+}
+
+/* Make sure the button is visible in battle results */
+.battle-result {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 232, 31, 0.2);
+    position: relative;
 }

@@ -15,7 +15,29 @@ const PersonDetail = ({ match }) => {
     const [neighbors, setNeighbors] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [imageError, setImageError] = useState(false);
     const history = useHistory();
+
+    // Character images mapping
+    const CHARACTER_IMAGES = {
+        'Luke Skywalker': 'https://starwars-visualguide.com/assets/img/characters/1.jpg',
+        'C-3PO': 'https://starwars-visualguide.com/assets/img/characters/2.jpg',
+        'R2-D2': 'https://starwars-visualguide.com/assets/img/characters/3.jpg',
+        'Darth Vader': 'https://starwars-visualguide.com/assets/img/characters/4.jpg',
+        'Leia Organa': 'https://starwars-visualguide.com/assets/img/characters/5.jpg',
+        'Owen Lars': 'https://starwars-visualguide.com/assets/img/characters/6.jpg',
+        'Beru Whitesun lars': 'https://starwars-visualguide.com/assets/img/characters/7.jpg',
+        'R5-D4': 'https://starwars-visualguide.com/assets/img/characters/8.jpg',
+        'Biggs Darklighter': 'https://starwars-visualguide.com/assets/img/characters/9.jpg',
+        'Obi-Wan Kenobi': 'https://starwars-visualguide.com/assets/img/characters/10.jpg',
+    };
+
+    const getImageUrl = (character) => {
+        if (!character) return '';
+        const characterId = character.url.split('/')[5];
+        return CHARACTER_IMAGES[character.name] || 
+               `https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`;
+    };
 
     useEffect(() => {
         let isSubscribed = true;
@@ -90,28 +112,41 @@ const PersonDetail = ({ match }) => {
         setNeighbors(residents);
     };
 
+    const handleBack = () => {
+        history.goBack(); // This will go to the previous page in history
+    };
+
     if (error) return <div className="error-message">Error: {error}</div>;
     if (isLoading) return <LoadingSpinner />;
     if (!person || !planet) return null;
 
     return (
         <div className="person-detail">
-            <button className="back-button" onClick={() => history.push('/')}>
+            <button className="back-button" onClick={handleBack}>
                 ← Back
             </button>
-            <h1>{person.name}</h1>
+            
+            <div className="person-detail-header">
+                <div className="character-portrait detail-portrait">
+                    <img 
+                        src={!imageError ? getImageUrl(person) : `https://ui-avatars.com/api/?name=${encodeURIComponent(person.name)}&size=300&background=random`}
+                        alt={person.name}
+                        onError={() => setImageError(true)}
+                    />
+                </div>
+                <h1>{person.name}</h1>
+            </div>
+
             <div className="person-info">
-                <p>
-                    <strong>Height:</strong>
-                    <span>{person.height}cm</span>
-                </p>
-                <p><strong>Mass:</strong> {person.mass}kg</p>
+                <p><strong>Height:</strong> {person.height === "unknown" ? "Unknown" : `${person.height}cm`}</p>
+                <p><strong>Mass:</strong> {person.mass === "unknown" ? "Unknown" : `${person.mass}kg`}</p>
                 <p><strong>Birth Year:</strong> {person.birth_year}</p>
                 <p><strong>Gender:</strong> {person.gender}</p>
                 <p><strong>Eye Color:</strong> {person.eye_color}</p>
                 <p><strong>Hair Color:</strong> {person.hair_color}</p>
                 <p><strong>Home Planet:</strong> {planet.name}</p>
             </div>
+
             <div className="neighbors">
                 <h2>Planet Neighbors from {planet.name}</h2>
                 {neighbors.length > 0 ? (

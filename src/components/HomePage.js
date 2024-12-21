@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PersonCard from './PersonCard';
 import LoadingSpinner from './LoadingSpinner';
+import CompareCharacters from './CompareCharacters';
 
 const API_URL = 'https://swapi.py4e.com/api/'
 
@@ -13,6 +14,7 @@ const HomePage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [showBattleMode, setShowBattleMode] = useState(false);
 
     useEffect(() => {
         const fetchAllPeople = async () => {
@@ -132,28 +134,49 @@ const HomePage = () => {
     return (
         <div className="home-page">
             <div className="content-container">
-                <input
-                    type="text"
-                    placeholder="Search Characters..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="search-input"
-                />
-                <div className="card-container">
-                    {isLoading && !searchTerm ? (
-                        <LoadingSpinner />
-                    ) : filteredPeople.length > 0 ? (
-                        filteredPeople.map((person, index) => (
-                            <PersonCard key={index} person={person} />
-                        ))
-                    ) : (
-                        <p>No characters found</p>
-                    )}
+                <div className="mode-toggle">
+                    <button 
+                        className={`mode-button ${!showBattleMode ? 'active' : ''}`}
+                        onClick={() => setShowBattleMode(false)}
+                    >
+                        Browse Mode
+                    </button>
+                    <button 
+                        className={`mode-button ${showBattleMode ? 'active' : ''}`}
+                        onClick={() => setShowBattleMode(true)}
+                    >
+                        Battle Mode
+                    </button>
                 </div>
-                {!searchTerm && (
-                    <div className="pagination">
-                        {renderPaginationButtons()}
-                    </div>
+
+                {showBattleMode ? (
+                    <CompareCharacters characters={allPeople} />
+                ) : (
+                    <>
+                        <input
+                            type="text"
+                            placeholder="Search Characters..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="search-input"
+                        />
+                        <div className="card-container">
+                            {isLoading && !searchTerm ? (
+                                <LoadingSpinner />
+                            ) : filteredPeople.length > 0 ? (
+                                filteredPeople.map((person, index) => (
+                                    <PersonCard key={index} person={person} />
+                                ))
+                            ) : (
+                                <p>No characters found</p>
+                            )}
+                        </div>
+                        {!searchTerm && (
+                            <div className="pagination">
+                                {renderPaginationButtons()}
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </div>

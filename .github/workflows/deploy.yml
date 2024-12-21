@@ -20,20 +20,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.20.2'
+          node-version: '16.x'
 
       - name: Install Dependencies
         run: npm install
 
       - name: Build
         run: npm run build
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./build
+        env:
+          CI: false
 
       - name: Deploy
-        uses: actions/deploy-pages@v4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ./build
+          folder: build
