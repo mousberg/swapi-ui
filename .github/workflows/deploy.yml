@@ -34,7 +34,9 @@ jobs:
           npm install core-js@3.23.3 --save-exact --no-package-lock
 
       - name: Build
-        run: npm run build
+        run: |
+          npm run build
+          ls -la  # Debug: List files to see what was created
         env:
           CI: false
           SKIP_PREFLIGHT_CHECK: true
@@ -43,9 +45,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./build
+          path: dist
 
       - name: Deploy
         uses: actions/deploy-pages@v4
         with:
-          folder: ./build
+          folder: dist
