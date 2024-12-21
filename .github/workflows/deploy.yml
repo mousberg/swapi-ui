@@ -16,33 +16,18 @@ jobs:
     env:
       NODE_ENV: production
       npm_config_ignore_scripts: true
+      NODE_OPTIONS: ""
     steps:
       - uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
-
-      - name: Debug Environment
-        run: |
-          echo "Current NODE_OPTIONS: $NODE_OPTIONS"
-          printenv | grep -i node
-          npm config list
-
-      - name: Clean npm cache and config
-        run: |
-          npm cache clean --force
-          npm config set ignore-scripts true
-          npm config set legacy-peer-deps true
-          npm config set audit false
-          npm config set fund false
-          npm config set package-lock false
-          unset NODE_OPTIONS
+          node-version: '16.20.2'
 
       - name: Install Dependencies
         run: |
-          npm install --production --no-optional
+          npm install --legacy-peer-deps --no-optional
           npm install --save-dev @babel/plugin-proposal-private-property-in-object@7.21.11
 
       - name: Build
