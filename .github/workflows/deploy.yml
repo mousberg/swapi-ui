@@ -23,12 +23,13 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install --legacy-peer-deps --ignore-scripts
+          npm install --legacy-peer-deps --ignore-scripts --no-audit
           npm install --save-dev @babel/plugin-proposal-private-property-in-object@7.21.11
+          npm install ejs@3.1.9 --no-scripts
 
       - name: Build
         run: |
-          export NODE_OPTIONS=--openssl-legacy-provider
+          unset NODE_OPTIONS
           CI=false npm run build
 
       - name: Upload artifact
