@@ -13,8 +13,6 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      NODE_OPTIONS: ""  # Clear NODE_OPTIONS at job level
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -22,18 +20,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.20.2'
+          node-version: '14'
 
       - name: Install Dependencies
-        run: |
-          npm install --ignore-scripts --no-audit --no-fund --omit=optional
-          find . -name "ejs" -type d -exec rm -rf {} +
-          npm install --no-package-lock --ignore-scripts
+        run: npm install --legacy-peer-deps
 
       - name: Build
-        run: |
-          unset NODE_OPTIONS
-          CI=false DISABLE_ESLINT_PLUGIN=true npm run build
+        run: npm run build
+        env:
+          CI: false
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
