@@ -23,8 +23,11 @@ jobs:
         with:
           node-version: '16'
           
+      - name: Clean npm cache
+        run: npm cache clean --force
+          
       - name: Install Dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
         
       - name: Build
         run: npm run build
