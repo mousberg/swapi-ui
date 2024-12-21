@@ -20,22 +20,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.20.2'
-          cache: 'npm'
-
-      - name: Clean npm cache
-        run: npm cache clean --force
+          node-version: '14'
 
       - name: Install Dependencies
         run: |
-          npm install --legacy-peer-deps --no-audit
-        env:
-          NODE_OPTIONS: ""
+          npm config set legacy-peer-deps true
+          npm install
 
       - name: Build
-        run: npm run build
-        env:
-          CI: false
+        run: |
+          export NODE_OPTIONS=""
+          npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
