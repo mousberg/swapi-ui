@@ -16,7 +16,7 @@ jobs:
     env:
       NODE_ENV: production
       npm_config_ignore_scripts: true
-      NODE_OPTIONS: ""
+
     steps:
       - uses: actions/checkout@v3
 
