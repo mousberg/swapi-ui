@@ -23,12 +23,21 @@ jobs:
           node-version: '14'
 
       - name: Install Dependencies
-        run: npm install --legacy-peer-deps
+        run: |
+          # Install without running any scripts
+          npm install --ignore-scripts
+          
+          # Install core-js separately without postinstall
+          npm install core-js@2.6.12 --ignore-scripts
+          
+          # Install babel-runtime without scripts
+          npm install babel-runtime --ignore-scripts
 
       - name: Build
         run: npm run build
         env:
           CI: false
+          SKIP_PREFLIGHT_CHECK: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
