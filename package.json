@@ -11,7 +11,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "CI=false react-scripts build",
+        "build": "node --max_old_space_size=4096 node_modules/.bin/react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
@@ -33,7 +33,7 @@
             "last 1 safari version"
         ]
     },
-    "homepage": "https://yourusername.github.io/swapi-ui/",
+    "homepage": "https://mousberg.github.io/swapi-ui/",
     "devDependencies": {
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
     }
