@@ -22,8 +22,16 @@ jobs:
         with:
           node-version: '12.22.12'
 
+      - name: Configure npm
+        run: |
+          npm config set ignore-scripts true
+          npm config set legacy-peer-deps true
+          npm config set unsafe-perm true
+
       - name: Install Dependencies
-        run: npm install --legacy-peer-deps
+        run: |
+          npm install --no-package-lock
+          npm install core-js@3.23.3 --save-exact --no-package-lock
 
       - name: Build
         run: npm run build
